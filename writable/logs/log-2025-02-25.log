@@ -686,3 +686,99 @@ CRITICAL - 2025-02-25 13:35:35 --> ErrorException: Cannot declare class App\Data
 [Method: CLI, Route: migrate:refresh]
 in APPPATH/Database/Migrations/2025-02-25-132306_CreateTestTable.php on line 7.
  1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2025-02-25 13:44:00 --> mysqli_sql_exception: Invalid default value for 'created_at' in /home/rafael/Projetos/teste/system/Database/MySQLi/Connection.php:327
+Stack trace:
+#0 /home/rafael/Projetos/teste/system/Database/MySQLi/Connection.php(327): mysqli->query()
+#1 /home/rafael/Projetos/teste/system/Database/BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute()
+#2 /home/rafael/Projetos/teste/system/Database/BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery()
+#3 /home/rafael/Projetos/teste/system/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query()
+#4 /home/rafael/Projetos/teste/app/Database/Migrations/2025-02-25-134259_CreateClientesTable.php(37): CodeIgniter\Database\Forge->createTable()
+#5 /home/rafael/Projetos/teste/system/Database/MigrationRunner.php(866): App\Database\Migrations\CreateClientesTable->up()
+#6 /home/rafael/Projetos/teste/system/Database/MigrationRunner.php(182): CodeIgniter\Database\MigrationRunner->migrate()
+#7 /home/rafael/Projetos/teste/system/Commands/Database/Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/rafael/Projetos/teste/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Migrate->run()
+#9 /home/rafael/Projetos/teste/system/CLI/Console.php(48): CodeIgniter\CLI\Commands->run()
+#10 /home/rafael/Projetos/teste/system/Boot.php(360): CodeIgniter\CLI\Console->run()
+#11 /home/rafael/Projetos/teste/system/Boot.php(104): CodeIgniter\Boot::runCommand()
+#12 /home/rafael/Projetos/teste/spark(84): CodeIgniter\Boot::bootSpark()
+#13 {main}
+ERROR - 2025-02-25 13:45:06 --> mysqli_sql_exception: Invalid default value for 'created_at' in /home/rafael/Projetos/teste/system/Database/MySQLi/Connection.php:327
+Stack trace:
+#0 /home/rafael/Projetos/teste/system/Database/MySQLi/Connection.php(327): mysqli->query()
+#1 /home/rafael/Projetos/teste/system/Database/BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute()
+#2 /home/rafael/Projetos/teste/system/Database/BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery()
+#3 /home/rafael/Projetos/teste/system/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query()
+#4 /home/rafael/Projetos/teste/app/Database/Migrations/2025-02-25-134259_CreateClientesTable.php(37): CodeIgniter\Database\Forge->createTable()
+#5 /home/rafael/Projetos/teste/system/Database/MigrationRunner.php(866): App\Database\Migrations\CreateClientesTable->up()
+#6 /home/rafael/Projetos/teste/system/Database/MigrationRunner.php(182): CodeIgniter\Database\MigrationRunner->migrate()
+#7 /home/rafael/Projetos/teste/system/Commands/Database/Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/rafael/Projetos/teste/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Migrate->run()
+#9 /home/rafael/Projetos/teste/system/CLI/Console.php(48): CodeIgniter\CLI\Commands->run()
+#10 /home/rafael/Projetos/teste/system/Boot.php(360): CodeIgniter\CLI\Console->run()
+#11 /home/rafael/Projetos/teste/system/Boot.php(104): CodeIgniter\Boot::runCommand()
+#12 /home/rafael/Projetos/teste/spark(84): CodeIgniter\Boot::bootSpark()
+#13 {main}
+ERROR - 2025-02-25 13:45:16 --> mysqli_sql_exception: Invalid default value for 'created_at' in /home/rafael/Projetos/teste/system/Database/MySQLi/Connection.php:327
+Stack trace:
+#0 /home/rafael/Projetos/teste/system/Database/MySQLi/Connection.php(327): mysqli->query()
+#1 /home/rafael/Projetos/teste/system/Database/BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute()
+#2 /home/rafael/Projetos/teste/system/Database/BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery()
+#3 /home/rafael/Projetos/teste/system/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query()
+#4 /home/rafael/Projetos/teste/app/Database/Migrations/2025-02-25-134259_CreateClientesTable.php(37): CodeIgniter\Database\Forge->createTable()
+#5 /home/rafael/Projetos/teste/system/Database/MigrationRunner.php(866): App\Database\Migrations\CreateClientesTable->up()
+#6 /home/rafael/Projetos/teste/system/Database/MigrationRunner.php(182): CodeIgniter\Database\MigrationRunner->migrate()
+#7 /home/rafael/Projetos/teste/system/Commands/Database/Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/rafael/Projetos/teste/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Migrate->run()
+#9 /home/rafael/Projetos/teste/system/CLI/Console.php(48): CodeIgniter\CLI\Commands->run()
+#10 /home/rafael/Projetos/teste/system/Boot.php(360): CodeIgniter\CLI\Console->run()
+#11 /home/rafael/Projetos/teste/system/Boot.php(104): CodeIgniter\Boot::runCommand()
+#12 /home/rafael/Projetos/teste/spark(84): CodeIgniter\Boot::bootSpark()
+#13 {main}
+ERROR - 2025-02-25 13:45:30 --> mysqli_sql_exception: Invalid default value for 'created_at' in /home/rafael/Projetos/teste/system/Database/MySQLi/Connection.php:327
+Stack trace:
+#0 /home/rafael/Projetos/teste/system/Database/MySQLi/Connection.php(327): mysqli->query()
+#1 /home/rafael/Projetos/teste/system/Database/BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute()
+#2 /home/rafael/Projetos/teste/system/Database/BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery()
+#3 /home/rafael/Projetos/teste/system/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query()
+#4 /home/rafael/Projetos/teste/app/Database/Migrations/2025-02-25-134259_CreateClientesTable.php(37): CodeIgniter\Database\Forge->createTable()
+#5 /home/rafael/Projetos/teste/system/Database/MigrationRunner.php(866): App\Database\Migrations\CreateClientesTable->up()
+#6 /home/rafael/Projetos/teste/system/Database/MigrationRunner.php(182): CodeIgniter\Database\MigrationRunner->migrate()
+#7 /home/rafael/Projetos/teste/system/Commands/Database/Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/rafael/Projetos/teste/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Migrate->run()
+#9 /home/rafael/Projetos/teste/system/CLI/Console.php(48): CodeIgniter\CLI\Commands->run()
+#10 /home/rafael/Projetos/teste/system/Boot.php(360): CodeIgniter\CLI\Console->run()
+#11 /home/rafael/Projetos/teste/system/Boot.php(104): CodeIgniter\Boot::runCommand()
+#12 /home/rafael/Projetos/teste/spark(84): CodeIgniter\Boot::bootSpark()
+#13 {main}
+ERROR - 2025-02-25 13:46:27 --> mysqli_sql_exception: Invalid default value for 'created_at' in /home/rafael/Projetos/teste/system/Database/MySQLi/Connection.php:327
+Stack trace:
+#0 /home/rafael/Projetos/teste/system/Database/MySQLi/Connection.php(327): mysqli->query()
+#1 /home/rafael/Projetos/teste/system/Database/BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute()
+#2 /home/rafael/Projetos/teste/system/Database/BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery()
+#3 /home/rafael/Projetos/teste/system/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query()
+#4 /home/rafael/Projetos/teste/app/Database/Migrations/2025-02-25-134259_CreateClientesTable.php(39): CodeIgniter\Database\Forge->createTable()
+#5 /home/rafael/Projetos/teste/system/Database/MigrationRunner.php(866): App\Database\Migrations\CreateClientesTable->up()
+#6 /home/rafael/Projetos/teste/system/Database/MigrationRunner.php(182): CodeIgniter\Database\MigrationRunner->migrate()
+#7 /home/rafael/Projetos/teste/system/Commands/Database/Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/rafael/Projetos/teste/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Migrate->run()
+#9 /home/rafael/Projetos/teste/system/CLI/Console.php(48): CodeIgniter\CLI\Commands->run()
+#10 /home/rafael/Projetos/teste/system/Boot.php(360): CodeIgniter\CLI\Console->run()
+#11 /home/rafael/Projetos/teste/system/Boot.php(104): CodeIgniter\Boot::runCommand()
+#12 /home/rafael/Projetos/teste/spark(84): CodeIgniter\Boot::bootSpark()
+#13 {main}
+ERROR - 2025-02-25 13:46:50 --> mysqli_sql_exception: Invalid default value for 'created_at' in /home/rafael/Projetos/teste/system/Database/MySQLi/Connection.php:327
+Stack trace:
+#0 /home/rafael/Projetos/teste/system/Database/MySQLi/Connection.php(327): mysqli->query()
+#1 /home/rafael/Projetos/teste/system/Database/BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute()
+#2 /home/rafael/Projetos/teste/system/Database/BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery()
+#3 /home/rafael/Projetos/teste/system/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query()
+#4 /home/rafael/Projetos/teste/app/Database/Migrations/2025-02-25-134259_CreateClientesTable.php(39): CodeIgniter\Database\Forge->createTable()
+#5 /home/rafael/Projetos/teste/system/Database/MigrationRunner.php(866): App\Database\Migrations\CreateClientesTable->up()
+#6 /home/rafael/Projetos/teste/system/Database/MigrationRunner.php(182): CodeIgniter\Database\MigrationRunner->migrate()
+#7 /home/rafael/Projetos/teste/system/Commands/Database/Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest()
+#8 /home/rafael/Projetos/teste/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Migrate->run()
+#9 /home/rafael/Projetos/teste/system/CLI/Console.php(48): CodeIgniter\CLI\Commands->run()
+#10 /home/rafael/Projetos/teste/system/Boot.php(360): CodeIgniter\CLI\Console->run()
+#11 /home/rafael/Projetos/teste/system/Boot.php(104): CodeIgniter\Boot::runCommand()
+#12 /home/rafael/Projetos/teste/spark(84): CodeIgniter\Boot::bootSpark()
+#13 {main}
