@@ -30,7 +30,10 @@ class ClientesController extends BaseController
             $this->model->like('nome_razao_social', $nomeRazaoSocial);
         }
 
-        return $this->respond($this->model->findAll());
+        return $this->respond([
+            'cabecalho' => ['status' => 200, 'mensagem' => 'Dados retornados com sucesso'],
+            'retorno' => $this->model->findAll()
+        ]);
     }
 
     public function show(int $id)
@@ -41,22 +44,34 @@ class ClientesController extends BaseController
             return $this->failNotFound('Cliente não encontrado :/');
         }
 
-        return $this->respond($data);
+        return $this->respond([
+            'cabecalho' => ['status' => 200, 'mensagem' => 'Dados retornados com sucesso'],
+            'retorno' => $data
+        ]);
     }
-
+    
     public function store()
     {
-        $data = $this->request->getPost();
-
+        $contentType = $this->request->getHeaderLine('Content-Type');
+        
+        if (strpos($contentType, 'application/json') !== false) {
+            $data = $this->request->getJSON(true);
+        } else {
+            $data = $this->request->getPost();
+        }
+        
         if (!$this->validate(ClienteStoreValidation::rules(), ClienteStoreValidation::messages())) {
             return $this->failValidationErrors($this->validator->getErrors());
         }
-
+    
         if (!$this->model->insert($data)) {
             return $this->failValidationErrors($this->model->errors());
         }
-
-        return $this->respondCreated($data);
+    
+        return $this->respond([
+            'cabecalho' => ['status' => 201, 'mensagem' => 'Dados criados com sucesso'],
+            'retorno' => $data
+        ]);
     }
 
     public function update(int $id)
@@ -71,7 +86,10 @@ class ClientesController extends BaseController
             return $this->failValidationErrors($this->model->errors());
         }
 
-        return $this->respondUpdated($data);
+        return $this->respond([
+            'cabecalho' => ['status' => 200, 'mensagem' => 'Dados atualizados com sucesso'],
+            'retorno' => $data
+        ]);
     }
 
     public function destroy(int $id)
@@ -81,6 +99,10 @@ class ClientesController extends BaseController
         }
 
         $this->model->delete($id);
-        return $this->respondDeleted(['id' => $id, 'message' => 'Cliente deletado com sucesso.']);
+
+        return $this->respond([
+            'cabecalho' => ['status' => 204, 'mensagem' => 'Dado deletado com sucesso'],
+            'retorno' => []
+        ]);
     }
 }
