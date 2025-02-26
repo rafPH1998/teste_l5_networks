@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\PedidoCompraModel;
 use App\Models\PedidoItemModel;
+use App\Models\ProdutoModel;
 use App\Validation\PedidoCompraStoreValidation;
 use CodeIgniter\API\ResponseTrait;
 
@@ -13,11 +14,13 @@ class PedidosCompraController extends BaseController
     
     protected $model;
     protected $itemModel;
+    protected $produtoModel;
 
     public function __construct()
     {
         $this->model = new PedidoCompraModel();
         $this->itemModel = new PedidoItemModel();
+        $this->produtoModel = new ProdutoModel();
     }
 
     public function index()
@@ -82,6 +85,19 @@ class PedidosCompraController extends BaseController
         $db->transBegin();
 
         try {
+            foreach ($itens as &$item) {
+                $produto = $this->produtoModel->getProduto($item['produto_id']);
+
+                if (!$produto) {
+                    throw new \Exception("O produto ID {$item['produto_id']} não existe.");
+                }
+
+                if ($item['quantidade'] > $produto->quantidade) {
+                    throw new \Exception("Produto {$produto->nome} não tem a quantidade desejada. Disponível: {$produto->quantidade}.");
+                }
+            }
+            unset($item);
+
             if (!$this->model->insert($data)) {
                 throw new \Exception('Erro ao inserir o pedido.');
             }
@@ -89,6 +105,8 @@ class PedidosCompraController extends BaseController
             $pedidoId = $this->model->getInsertID();
 
             foreach ($itens as &$item) {
+                $this->produtoModel->atualizarEstoque($item['produto_id'], $item['quantidade']);
+
                 $item['pedido_id'] = $pedidoId;
                 $item['created_at'] = $item['updated_at'] = date('Y-m-d H:i:s');
             }

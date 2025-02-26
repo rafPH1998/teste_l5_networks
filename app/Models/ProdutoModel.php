@@ -11,7 +11,7 @@ class ProdutoModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['nome', 'descricao', 'preco', 'created_at', 'updated_at'];
+    protected $allowedFields = ['nome', 'descricao', 'quantidade', 'preco', 'created_at', 'updated_at'];
     protected $useTimestamps = true;
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
@@ -20,4 +20,23 @@ class ProdutoModel extends Model
     {
         return $this->hasMany('App\Models\PedidoItemModel', 'produto_id', 'id');
     }
+
+    public function getProduto(int $produtoId)
+    {
+        return $this->db->table('produtos')
+            ->select('id, nome, quantidade')
+            ->where('id', $produtoId)
+            ->get()
+            ->getRow();
+    }
+
+    public function atualizarEstoque(int $produtoId, int $quantidade)
+    {
+        $this->db->table('produtos')
+            ->where('id', $produtoId)
+            ->set('quantidade', 'quantidade - ' . $quantidade, false)
+            ->update();
+    }
+
+
 }

@@ -18,6 +18,10 @@ class CreateProdutosTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '255',
             ],
+            'quantidade' => [
+                'type' => 'INT',
+                'unsigned' => true,
+            ],
             'descricao' => [
                 'type' => 'TEXT',
                 'null' => true,
