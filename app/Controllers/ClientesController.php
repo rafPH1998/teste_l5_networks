@@ -21,6 +21,7 @@ class ClientesController extends BaseController
     {
         $cpfCnpj         = $this->request->getGet('cpf_cnpj');
         $nomeRazaoSocial = $this->request->getGet('nome_razao_social');
+        $perPage         = $this->request->getGet('per_page') ?? 10;
 
         if ($cpfCnpj) {
             $this->model->where('cpf_cnpj', $cpfCnpj);
@@ -30,9 +31,20 @@ class ClientesController extends BaseController
             $this->model->like('nome_razao_social', $nomeRazaoSocial);
         }
 
+        $dados = $this->model->paginate($perPage);
+        $pager = $this->model->pager;
+
         return $this->respond([
             'cabecalho' => ['status' => 200, 'mensagem' => 'Dados retornados com sucesso'],
-            'retorno' => $this->model->findAll()
+            'retorno' => $dados,
+            'paginacao' => [
+                'current_page' => $pager->getCurrentPage(),
+                'per_page'     => $pager->getPerPage(),
+                'total'        => $pager->getTotal(),
+                'last_page'    => $pager->getPageCount(),
+                'next'         => $pager->getNextPageURI(),
+                'previous'     => $pager->getPreviousPageURI(),
+            ]
         ]);
     }
 

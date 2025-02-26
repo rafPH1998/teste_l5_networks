@@ -26,30 +26,40 @@ class PedidosCompraController extends BaseController
     public function index()
     {
         $clienteId = $this->request->getGet('cliente_id');
-        $status = $this->request->getGet('status');
-
+        $status    = $this->request->getGet('status');
+        $perPage   = $this->request->getGet('per_page') ?? 10;
+    
         if ($clienteId) {
             $this->model->where('cliente_id', $clienteId);
         }
-
+    
         if ($status) {
             $this->model->where('status', $status);
         }
-
-        $pedidos = $this->model->findAll();
-        
+    
+        $pedidos = $this->model->paginate($perPage);
+        $pager   = $this->model->pager;
+    
         foreach ($pedidos as &$pedido) {
             $pedido['itens'] = $this->itemModel
-                            ->where('pedido_id', $pedido['id'])
-                            ->findAll();
+                ->where('pedido_id', $pedido['id'])
+                ->findAll();
         }
-
+    
         return $this->respond([
             'cabecalho' => ['status' => 200, 'mensagem' => 'Dados retornados com sucesso'],
-            'retorno' => $pedidos
+            'retorno'   => $pedidos,
+            'paginacao' => [
+                'current_page' => $pager->getCurrentPage(),
+                'per_page'     => $pager->getPerPage(),
+                'total'        => $pager->getTotal(),
+                'last_page'    => $pager->getPageCount(),
+                'next'         => $pager->getNextPageURI(),
+                'previous'     => $pager->getPreviousPageURI(),
+            ]
         ]);
     }
-
+    
     public function show(int $id)
     {
         $pedido = $this->model->find($id);

@@ -16,26 +16,37 @@ class ProdutoController extends BaseController
     {
         $this->model = new ProdutoModel();
     }
-
     public function index()
     {
         $nome         = $this->request->getGet('nome');
         $descricao    = $this->request->getGet('descricao');
-
+        $perPage      = $this->request->getGet('per_page') ?? 10;
+    
         if ($nome) {
             $this->model->like('nome', $nome);
         }
-
+    
         if ($descricao) {
             $this->model->like('descricao', $descricao);
         }
-
+    
+        $dados = $this->model->paginate($perPage);
+        $pager = $this->model->pager;
+    
         return $this->respond([
             'cabecalho' => ['status' => 200, 'mensagem' => 'Dados retornados com sucesso'],
-            'retorno' => $this->model->findAll()
+            'retorno' => $dados,
+            'paginacao' => [
+                'current_page' => $pager->getCurrentPage(),
+                'per_page'     => $pager->getPerPage(),
+                'total'        => $pager->getTotal(),
+                'last_page'    => $pager->getPageCount(),
+                'next'         => $pager->getNextPageURI(),
+                'previous'     => $pager->getPreviousPageURI(),
+            ]
         ]);
     }
-
+    
     public function show(int $id)
     {
         $data = $this->model->find($id);
