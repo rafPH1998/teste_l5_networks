@@ -24,3 +24,11 @@ $routes->post('produtos', 'ProdutoController::store');
 $routes->put('produtos/(:num)', 'ProdutoController::update/$1');
 $routes->delete('produtos/(:num)', 'ProdutoController::destroy/$1');
 
+/**
+ * Pedidos
+*/
+$routes->get('pedidos', 'PedidosCompraController::index');
+$routes->get('pedidos/(:num)', 'PedidosCompraController::show/$1');
+$routes->post('pedidos', 'PedidosCompraController::store');
+$routes->delete('pedidos/(:num)', 'PedidosCompraController::destroy/$1');
+$routes->patch('pedidos/(:num)/status', 'PedidosCompraController::updateStatus/$1');
