@@ -53,7 +53,7 @@ php spark migrate
 Após a execução dos comandos acima, acesse o projeto no seu navegador através do localhost:8000.
 
 ---
-**Nota:** Não foi adicionado a autenticação, por tanto não é necessário passar o token para cada requisição.
+**Nota:** Dentro da pasta bando_de_dados, está o schema das tabelas do projeto.
 
 ## Rotas da aplicação para produtos
 
