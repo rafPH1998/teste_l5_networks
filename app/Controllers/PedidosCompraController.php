@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ClienteModel;
 use App\Models\PedidoCompraModel;
 use App\Models\PedidoItemModel;
 use App\Models\ProdutoModel;
@@ -15,12 +16,14 @@ class PedidosCompraController extends BaseController
     protected $model;
     protected $itemModel;
     protected $produtoModel;
+    protected $clienteModel;
 
     public function __construct()
     {
         $this->model = new PedidoCompraModel();
         $this->itemModel = new PedidoItemModel();
         $this->produtoModel = new ProdutoModel();
+        $this->clienteModel = new ClienteModel();
     }
 
     public function index()
@@ -29,26 +32,38 @@ class PedidosCompraController extends BaseController
         $status    = $this->request->getGet('status');
         $perPage   = $this->request->getGet('per_page') ?? 10;
     
+        $query = $this->model
+            ->select('pedidos_compra.*, clientes.nome_razao_social, clientes.cpf_cnpj')
+            ->join('clientes', 'clientes.id = pedidos_compra.cliente_id');
+    
         if ($clienteId) {
-            $this->model->where('cliente_id', $clienteId);
+            $query->where('pedidos_compra.cliente_id', $clienteId);
         }
     
         if ($status) {
-            $this->model->where('status', $status);
+            $query->where('pedidos_compra.status', $status);
         }
     
-        $pedidos = $this->model->paginate($perPage);
+        $pedidos = $query->paginate($perPage);
         $pager   = $this->model->pager;
     
         foreach ($pedidos as &$pedido) {
             $pedido['itens'] = $this->itemModel
                 ->where('pedido_id', $pedido['id'])
                 ->findAll();
+    
+            $pedido['cliente'] = [
+                'id'                => $pedido['cliente_id'],
+                'nome_razao_social' => $pedido['nome_razao_social'],
+                'cpf_cnpj'          => $pedido['cpf_cnpj'],
+            ];
+    
+            unset($pedido['cliente_id'], $pedido['nome_razao_social'], $pedido['cpf_cnpj']);
         }
     
         return $this->respond([
             'cabecalho' => ['status' => 200, 'mensagem' => 'Dados retornados com sucesso'],
-            'retorno'   => $pedidos,
+            'pedidos'   => $pedidos,
             'paginacao' => [
                 'current_page' => $pager->getCurrentPage(),
                 'per_page'     => $pager->getPerPage(),

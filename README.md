@@ -12,7 +12,7 @@ Codeigniter 4, e um banco de dados relacional MySQL.
 Certifique-se de ter as seguintes ferramentas instaladas:
 
 - **Docker**: v27.4.x
-- **Docker Compose**: v1.29.x
+- **Docker Compose**: v1.29.x ( Caso estiver no windows )
 - **PHP**: 8.1.x >
 - **MySql**: 5.7.22.x >
 
@@ -31,12 +31,22 @@ Siga os passos abaixo para configurar e iniciar o projeto:
    git clone https://github.com/rafPH1998/teste_l5_networks.git
    ```
 
-2. Execute o comando para obter o banco de dados rodando em sua máquina local:
+2. Navegue até o projeto:
+   ```bash
+   cd teste_l5_networks
+   ```
+
+3. Execute o comando para obter o banco de dados rodando em sua máquina local:
    ```bash
    docker-compose up -d
    ```
 
-2. Execute o comando para rodar o servidor e ter acesso ao projeto:
+4. Execute o comando para obter as tabelas do projeto:
+```bash
+php spark migrate
+```
+
+5. Execute o comando para rodar o servidor e ter acesso ao projeto:
   ```bash
   php -S localhost:8000 -t public
   ```
@@ -337,39 +347,43 @@ Após a execução dos comandos acima, acesse o projeto no seu navegador atravé
 ```json
 [
   {
-    "cabecalho": {
-        "status": 200,
-        "mensagem": "Dados retornados com sucesso"
-    },
-    "retorno": [
-        {
-            "id": "5",
-            "cliente_id": "2",
-            "status": "Em Aberto",
-            "created_at": "2025-02-26 22:28:10",
-            "updated_at": "2025-02-26 22:28:10",
-            "itens": [
-                {
-                    "id": "7",
-                    "pedido_id": "5",
-                    "produto_id": "1",
-                    "quantidade": "1",
-                    "preco": "120.00",
-                    "created_at": "2025-02-26 22:28:10",
-                    "updated_at": "2025-02-26 22:28:10"
-                }
-            ]
+  "cabecalho": {
+      "status": 200,
+      "mensagem": "Dados retornados com sucesso"
+  },
+  "pedidos": [
+      {
+        "id": "1",
+        "status": "Em Aberto",
+        "created_at": "2025-02-27 13:59:55",
+        "updated_at": "2025-02-27 13:59:55",
+        "itens": [
+          {
+            "id": "1",
+            "pedido_id": "1",
+            "produto_id": "1",
+            "quantidade": "1",
+            "preco": "120.00",
+            "created_at": "2025-02-27 13:59:55",
+            "updated_at": "2025-02-27 13:59:55"
+          }
+        ],
+        "cliente": {
+          "id": "1",
+          "nome_razao_social": "Rafael",
+          "cpf_cnpj": "452.610.228-41"
         }
-    ],
-    "paginacao": {
-        "current_page": 1,
-        "per_page": 10,
-        "total": 1,
-        "last_page": 1,
-        "next": null,
-        "previous": null
     }
-}
+  ],
+  "paginacao": {
+      "current_page": 1,
+      "per_page": 10,
+      "total": 1,
+      "last_page": 1,
+      "next": null,
+      "previous": null
+  }
+  }
 ]
 ```
 
